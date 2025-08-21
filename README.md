@@ -84,34 +84,37 @@ Our chunking strategy:
 4. Enter your query in natural language
 5. View results and visualizations
 
-## Flow Chart of the Code
+## Application Flow Chart
 
 ```mermaid
 flowchart TD
-    A((Start)) --> B((Initialize Streamlit Page & Title))
-    B --> C((Load Sentence Embedding Model))
-    C --> D((User Uploads File))
-    D -->|CSV?| E((Load CSV with Pandas))
-    D -->|Excel?| F((Load Excel, Combine Sheets with Pandas))
-    D -->|PDF?| G((Extract Text from PDF into DataFrame))
-    D -->|JSON?| H((Load JSON with Pandas))
-    D -->|Other| I((Show Error & Stop))
-    E --> J((Display Data Preview))
-    F --> J
-    G --> J
-    H --> J
-    J --> K((Generate Embeddings for Each Row))
-    K --> L((Build FAISS Vector Index))
-    L --> M((User Inputs Query))
-    M --> N((On "Get Answer" Button))
-    N --> O((Embed Query))
-    O --> P((Search FAISS Index for Top Rows))
-    P --> Q((Prepare Context from Retrieved Rows))
-    Q --> R((Send Context & Query to Groq LLM))
-    R --> S((Stream LLM Response))
-    S --> T{Chart Spec?}
-    T -->|Yes| U((Generate Altair Chart & Display))
-    T -->|No| V((Display Raw Answer))
-    U --> W((End))
-    V --> W
+    Start --> InitPage
+    InitPage --> LoadModel
+    LoadModel --> UploadFile
+    UploadFile -->|CSV| LoadCSV
+    UploadFile -->|Excel| LoadExcel
+    UploadFile -->|PDF| LoadPDF
+    UploadFile -->|JSON| LoadJSON
+    UploadFile -->|Other| ShowError
+    LoadCSV --> Preview
+    LoadExcel --> Preview
+    LoadPDF --> Preview
+    LoadJSON --> Preview
+    Preview --> EmbedRows
+    EmbedRows --> BuildIndex
+    BuildIndex --> InputQuery
+    InputQuery --> ButtonClick
+    ButtonClick --> EmbedQuery
+    EmbedQuery --> SearchIndex
+    SearchIndex --> PrepareContext
+    PrepareContext --> QueryLLM
+    QueryLLM --> StreamLLM
+    StreamLLM --> ChartSpec
+    ChartSpec -->|Yes| ShowChart
+    ChartSpec -->|No| ShowAnswer
+    ShowChart --> End
+    ShowAnswer --> End
+    ShowError --> End
 ```
+
+---
