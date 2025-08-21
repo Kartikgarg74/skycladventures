@@ -1,0 +1,37 @@
+# Project specific exclusions
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.pytest_cache/
+.mypy_cache/
+
+# Streamlit specific
+.streamlit/secrets.toml
+
+# IDE specific
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# MacOS
+.DS_Store
+
+# Logs
+*.log
+
+# Temp files
+*.tmp
+*.bak
+
+# Virtual environment
+venv/
+.env
+
+# Data files - we want to track these as they're sample data
+#*.csv
+#*.xlsx
+#*.pdf
+#*.json

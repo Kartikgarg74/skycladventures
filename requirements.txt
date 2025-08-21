@@ -1,0 +1,7 @@
+streamlit
+sentence-transformers
+groq
+pandas
+faiss-cpu
+pymupdf
+altair
