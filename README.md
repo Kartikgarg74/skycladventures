@@ -72,3 +72,61 @@ Our chunking strategy:
 3. Upload your file (CSV, Excel, or PDF)
 4. Enter your query in natural language
 5. View results and visualizations
+
+## Flow Chart of the code
+[Start]
+   |
+   v
+[Initialize Streamlit Page & Title]
+   |
+   v
+[Load Sentence Embedding Model]
+   |
+   v
+[User Uploads File]
+   |
+   v
+[Check File Type]
+   |------(CSV?)------> [Load CSV with Pandas]
+   |------(Excel?)-----> [Load Excel, Combine Sheets with Pandas]
+   |------(PDF?)-------> [Extract Text from PDF into DataFrame]
+   |------(JSON?)------> [Load JSON with Pandas]
+   |------(Other)------> [Show Error & Stop]
+   |
+   v
+[Display Data Preview]
+   |
+   v
+[Generate Embeddings for Each Row]
+   |
+   v
+[Build FAISS Vector Index]
+   |
+   v
+[User Inputs Query]
+   |
+   v
+[On "Get Answer" Button]
+   |
+   v
+[Embed Query]
+   |
+   v
+[Search FAISS Index for Top Rows]
+   |
+   v
+[Prepare Context from Retrieved Rows]
+   |
+   v
+[Send Context & Query to Groq LLM]
+   |
+   v
+[Stream LLM Response]
+   |
+   v
+[Try Parse as Chart Spec]
+   |------(Chart Spec?)-------> [Generate Altair Chart & Display]
+   |------(No Chart Spec)-----> [Display Raw Answer]
+   |
+   v
+[End]
