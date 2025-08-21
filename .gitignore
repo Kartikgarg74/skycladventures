@@ -31,7 +31,7 @@ venv/
 .env
 
 # Data files - we want to track these as they're sample data
-#*.csv
-#*.xlsx
-#*.pdf
-#*.json
+*.csv
+*.xlsx
+*.pdf
+*.json
