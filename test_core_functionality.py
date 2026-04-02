@@ -42,7 +42,7 @@ def process_dataframe(df, file_path, sheet_name, embedding_model):
         all_embeddings.extend(batch_embeddings)
     embeddings = np.array(all_embeddings).astype('float32')
     dimension = embeddings.shape[1]
-    index = faiss.IndexFlatL2(dimension)
+    index = faiss.IndexFlatL2(dimension)  # Must match app.py (IndexFlatL2)
     index.add(np.array(embeddings).astype('float32'))
     print("FAISS index built successfully!")
     return {'index': index, 'dataframe': df}
